@@ -1,5 +1,6 @@
 package main;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
@@ -35,7 +36,7 @@ public class Menu {
 		while (seguir) {
 
 			// * pedirle al usuario que escoga una opcion y esperar una respuesta
-			System.out.println("Escoge uma opcion");
+			System.out.println(ANSI_CYAN + "Escoge uma opcion" + ANSI_RESET);
 			System.out.println(ANSI_BLUE +
 					"1 - Capturar Valor \n2 - Generar Tabla de Multiplicar \n3 - Determinar Si es Primo o No Primo \n4 - Capturar una Matriz 4 x 4: Desplegar la Diagonal Principal* y Secundaria \n5 - Salir del Programa \n6 - Mostrar el valor"
 					+ ANSI_RESET);
@@ -149,8 +150,8 @@ public class Menu {
 	 */
 	static void clear() {
 		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
+			System.in.read();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		System.out.print("\033[H\033[2J");
