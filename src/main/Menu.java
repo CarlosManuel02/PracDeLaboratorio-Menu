@@ -1,6 +1,6 @@
 package main;
 
-import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Menu {
@@ -13,17 +13,13 @@ public class Menu {
 	static int choice;// * Inicializar la variable choice para capturar la eleccion de usuario
 	static boolean seguir = true; //
 	static boolean primo;
-	static double matriz[][];
+	static int matriz[][] = new int[4][4];
 
-	public static final String ANSI_BLACK = "\u001B[30m";
+	// * colores para la consola
 	public static final String ANSI_RED = "\u001B[31m";
 	public static final String ANSI_GREEN = "\u001B[32m";
-	public static final String ANSI_YELLOW = "\u001B[33m";
 	public static final String ANSI_BLUE = "\u001B[34m";
-	public static final String ANSI_PURPLE = "\u001B[35m";
 	public static final String ANSI_CYAN = "\u001B[36m";
-	public static final String ANSI_WHITE = "\u001B[37m";
-
 	public static final String ANSI_RESET = "\u001B[0m";
 
 	public static void main(String[] args) {
@@ -115,33 +111,24 @@ public class Menu {
 	}
 
 	private static void procedimientoDiagonalesMatriz() {
-		for (int f = 1; f <= 4; f++) {
-			for (int c = 1; c <= 4; c++) {
-				matriz[f][c] = f;
-				switch (f) {
-					case 1:
-						matriz[f][c] = 1;
-						break;
-					case 2:
-						matriz[f][c] = 2;
-						break;
-					case 3:
-						matriz[f][c] = 3;
-						break;
-					case 4:
-						matriz[f][c] = 4;
-						break;
-				}
+		System.out.println("Escribir datos de la matriz ");
+		for (int f = 0; f <= 3; f++) {
+			for (int c = 0; c <= 3; c++) {
+				System.out.print("Escribir valor " + f + " , " + c + " : ");
+				scanner = new Scanner(System.in);
+				int dato = scanner.nextInt();
+				matriz[f][c] = dato;
 			}
 		}
-		for (int i = 0; i < matriz.length; i++) {
-			for (int j = 0; j < matriz[i].length; j++) {
-				System.out.print(matriz[i][j] + " ");
-				System.out.println();
-			}
+
+		for (int matrizInt[] : matriz) {
+			System.out.println(Arrays.toString(matrizInt));
 		}
+
 		clear();
+
 		menu();
+
 	}
 
 	/*
@@ -150,8 +137,8 @@ public class Menu {
 	 */
 	static void clear() {
 		try {
-			System.in.read();
-		} catch (IOException e) {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		System.out.print("\033[H\033[2J");
