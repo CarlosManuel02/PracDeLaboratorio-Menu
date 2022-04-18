@@ -5,15 +5,17 @@ import java.util.Scanner;
 
 public class Menu {
 
-	static Scanner scanner; // * Inicializar le escaner para recibir el imput del susario
+	static Scanner scanner; // * Definir le escaner para recibir el imput del susario
 	static int valor; /*
-						 * Inicializar la variable valor para capturar el numero introducido por el
+						 * Definir la variable valor para capturar el numero introducido por el
 						 * usuario
 						 */
-	static int choice;// * Inicializar la variable choice para capturar la eleccion de usuario
-	static boolean seguir = true; //
-	static boolean primo;
-	static int matriz[][] = new int[4][4];
+	static int choice;// * Definir la variable choice para capturar la eleccion de usuario
+	static boolean seguir; // * Definir la variable seguir para mantener el ciclo while activo
+	static boolean primo;// * Definir activo primo para realizar la operacion para determanr si un nuemro
+							// * es primo o no
+	static int matriz[][] = new int[4][4]; // * Definir la matriz para almacenar los datos para luego ser imprimidos en
+											// * la consola
 
 	// * colores para la consola
 	public static final String ANSI_RED = "\u001B[31m";
@@ -28,19 +30,21 @@ public class Menu {
 	}
 
 	static void menu() {
+		seguir = true;
 		// * Miemtras la variable seguir sea true se ejecutara el while
 		while (seguir) {
 
 			// * pedirle al usuario que escoga una opcion y esperar una respuesta
-			System.out.println(ANSI_CYAN + "Escoge uma opcion" + ANSI_RESET);
+			System.out.println(ANSI_CYAN + "Escoge una opcion" + ANSI_RESET);
 			System.out.println(ANSI_BLUE +
 					"1 - Capturar Valor \n2 - Generar Tabla de Multiplicar \n3 - Determinar Si es Primo o No Primo \n4 - Capturar una Matriz 4 x 4: Desplegar la Diagonal Principal* y Secundaria \n5 - Salir del Programa \n6 - Mostrar el valor"
 					+ ANSI_RESET);
 			scanner = new Scanner(System.in);
 			choice = scanner.nextInt();
 			/*
-			 * Llamar a X funcion segun el valor que el usuario ingrese, si el valor no se
-			 * encuamtra en las opciones se finalizara el programa
+			 * Llamar a X funcion segun el valor que el usuario ingrese, si el numero
+			 * ingresado no se
+			 * encuentra en las opciones se finalizara el programa
 			 */
 			switch (choice) {
 				case 1:
@@ -59,7 +63,7 @@ public class Menu {
 					seguir = false;
 					break;
 				case 6:
-					System.out.println(valor);
+					System.out.println(ANSI_CYAN + valor + ANSI_RESET);
 					clear();
 					break;
 				default:
@@ -82,8 +86,13 @@ public class Menu {
 	 * multiplicando y como multiplicador los mumenor del 1 al 12
 	 */
 	private static void procedimientoTablaMultiplicar() {
-		for (int i = 1; i <= 12; i++) {
-			System.out.println(ANSI_CYAN + valor + "x" + i + "=" + valor * i + ANSI_RESET);
+		if (valor == 0) {
+			System.out.println(ANSI_RED + "Todo numnero multiplicado por 0 da 0" + ANSI_RESET);
+
+		} else {
+			for (int i = 1; i <= 12; i++) {
+				System.out.println(ANSI_CYAN + valor + "x" + i + "=" + valor * i + ANSI_RESET);
+			}
 		}
 
 		clear();
@@ -111,24 +120,23 @@ public class Menu {
 	}
 
 	private static void procedimientoDiagonalesMatriz() {
+		// * Recivir los elemientos de la matriz
 		System.out.println("Escribir datos de la matriz ");
 		for (int f = 0; f <= 3; f++) {
 			for (int c = 0; c <= 3; c++) {
-				System.out.print("Escribir valor " + f + " , " + c + " : ");
+				System.out.print("Escribir valor para " + f + " , " + c + " : ");
 				scanner = new Scanner(System.in);
 				int dato = scanner.nextInt();
 				matriz[f][c] = dato;
 			}
 		}
-
+		// * Imprimir la matriz 4x4 en la consola
 		for (int matrizInt[] : matriz) {
 			System.out.println(Arrays.toString(matrizInt));
 		}
 
 		clear();
-
 		menu();
-
 	}
 
 	/*
